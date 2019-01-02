@@ -19,7 +19,7 @@ var configPattern string
 
 init() {
     cobra.OnInitialize(initConfig)
-    rootCmd.PersistentFlags().StringVar(&configPattern, "config-pattern", "configs/*.tml", "load list of config files")
+    rootCmd.PersistentFlags().StringVar(&configPattern, "config-pattern", "configs/*.yml", "load list of config files")
 }
 
 func initConfig() {
@@ -32,24 +32,28 @@ func initConfig() {
 
 ## Other Examples:
 
-### Read a slice of specific config files:
+### Merge in an array of specific config files:
 ```
-err := MergeConfigs(config_list)
-```
-
-### Read all files in a directory:
-```
-err := ReadDir("/home/dwburke/configs")
-```
-
-### Read all config files for a pattern:
-```
-err := ReadPattern("/home/dwburke/configs/myapp/*.yml")
+config_files := []string{
+    "/etc/app/config.yml",
+    os.Getenv("HOME") + "/.app-config.yml",
+}
+err := vipertools.MergeConfigs(config_list)
 ```
 
-### Read all files in a directory:
+### Merge in all files in a directory:
 ```
-err := ReadFile("config.yml")
+err := vipertools.ReadDir("/home/dwburke/configs")
+```
+
+### Merge all config files for a pattern:
+```
+err := vipertools.ReadPattern("/home/dwburke/configs/myapp/*.yml")
+```
+
+### Read one file in your current directory:
+```
+err := vipertools.ReadFile("config.yml")
 ```
 
 
