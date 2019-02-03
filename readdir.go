@@ -19,8 +19,8 @@ func ReadDir(directory string) error {
 	}
 
 	for _, info := range config_files {
-		if _, err := os.Stat(info.Name()); err == nil {
-			viper.SetConfigFile(info.Name())
+		if _, err := os.Stat(directory + "/" + info.Name()); err == nil {
+			viper.SetConfigFile(directory + "/" + info.Name())
 			if err := viper.MergeInConfig(); err != nil {
 				return err
 			}
