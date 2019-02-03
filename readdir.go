@@ -24,6 +24,8 @@ func ReadDir(directory string) error {
 			if err := viper.MergeInConfig(); err != nil {
 				return err
 			}
+		} else {
+			return err
 		}
 	}
 
